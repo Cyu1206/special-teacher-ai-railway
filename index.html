@@ -3,164 +3,242 @@
 <head>
   <meta charset="UTF-8" />
   <title>特教老師教學建議整理工具 (AI 版)</title>
+
+  <!-- Handwriting font (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
+    :root {
+      /* Monsters, Inc–inspired colors */
+      --monsters-teal: #8ad7d3;
+      --monsters-purple: #8b5fbf;
+      --monsters-lime: #c3ff7d;
+      --light-gray-bg: #f2f2f4;
+      --button-gray: #e0e0e0;
+      --text-black: #111111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Patrick Hand", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f5f5f5;
-      color: #333;
+      background-color: var(--light-gray-bg); /* light gray background */
+      color: var(--text-black);               /* black text */
     }
+
     header {
-      background-color: #4a90e2;
+      background: linear-gradient(120deg, var(--monsters-teal), var(--monsters-purple));
       color: white;
-      padding: 16px 24px;
+      padding: 18px 24px 20px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      position: relative;
     }
+
     header h1 {
       margin: 0;
-      font-size: 22px;
+      font-size: 26px;
+      letter-spacing: 1px;
     }
+
     header p {
       margin: 6px 0 0;
-      font-size: 14px;
-      opacity: 0.9;
+      font-size: 15px;
+      opacity: 0.95;
     }
+
+    /* little "monster eye" accent */
+    header::after {
+      content: "";
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffffff 0, #ffffff 40%, #4b4b4b 41%, #111 60%, #000 100%);
+      box-shadow: 0 0 0 4px var(--monsters-lime);
+    }
+
     main {
       padding: 16px 24px 32px;
       max-width: 1200px;
       margin: 0 auto;
     }
+
     .section {
-      background: white;
-      border-radius: 8px;
-      padding: 16px 20px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 18px 20px 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border-top: 5px solid var(--monsters-teal);
     }
+
     .section h2 {
       margin-top: 0;
-      font-size: 18px;
-      border-left: 4px solid #4a90e2;
+      font-size: 20px;
       padding-left: 8px;
+      border-left: 5px solid var(--monsters-purple);
+      display: inline-block;
     }
+
     textarea {
       width: 100%;
-      min-height: 100px;
+      min-height: 110px;
       resize: vertical;
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #cfcfcf;
+      font-size: 15px;
       box-sizing: border-box;
+      background-color: #fbfbfd;
+      color: var(--text-black);
+      line-height: 1.5;
     }
+
     label {
-      font-size: 14px;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 4px;
     }
+
     .flex {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
     }
+
     .flex-2 {
       flex: 2 1 320px;
     }
+
     .flex-1 {
       flex: 1 1 260px;
     }
-    .field-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 8px 0 10px;
-      align-items: center;
-    }
+
     select,
     button {
-      padding: 6px 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid #c9c9c9;
       font-size: 14px;
-      background: white;
-    }
-    button {
-      background-color: #4a90e2;
-      color: white;
-      border: none;
+      background: var(--button-gray);  /* light gray button */
+      color: var(--text-black);        /* black text on button */
+      font-family: "Patrick Hand", system-ui, sans-serif;
       cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
     }
+
+    button {
+      border-color: var(--monsters-teal);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
     button:hover {
-      background-color: #3a79c0;
+      background-color: #d4d4d4;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
     }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+    }
+
     .columns {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 16px;
       margin-top: 8px;
     }
+
     .role-column {
-      background: #fafafa;
-      border-radius: 8px;
+      background: #fafbff;
+      border-radius: 12px;
       padding: 12px;
-      border: 1px solid #e0e0e0;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      position: relative;
     }
+
     .role-column h3 {
       margin-top: 0;
       margin-bottom: 8px;
-      font-size: 16px;
+      font-size: 18px;
+      color: var(--monsters-purple);
     }
+
+    .role-column::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--monsters-teal);
+      box-shadow: 0 0 0 4px rgba(139, 95, 191, 0.2);
+    }
+
     .domain-block {
       margin-bottom: 12px;
       padding: 8px;
-      border-radius: 6px;
-      background: white;
-      border: 1px solid #e3e3e3;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid #e3e3f0;
     }
+
     .domain-block h4 {
       margin: 0 0 4px;
       font-size: 14px;
-    }
-    .domain-block ul {
-      list-style: disc;
-      padding-left: 20px;
-      margin: 4px 0 0;
-      font-size: 13px;
+      color: #444;
     }
 
-    /* 列印工具列 & 列印樣式 */
+    .domain-block ul {
+      list-style: disc;
+      padding-left: 22px;
+      margin: 4px 0 0;
+      font-size: 14px;
+    }
+
     .toolbar {
       display: flex;
       justify-content: flex-end;
       margin-bottom: 8px;
+      gap: 8px;
     }
 
-    .print-button {
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      background-color: #4a90e2;
-      color: #fff;
-      font-size: 14px;
-      cursor: pointer;
+    #aiStatus {
+      font-size: 13px;
     }
 
-    .print-button:hover {
-      background-color: #3a79c0;
-    }
-
+    /* Print styles */
     @media print {
       header,
       #aiButton,
       #addSuggestionBtn,
       .toolbar {
-        display: none !important; /* 列印時隱藏這些 UI */
+        display: none !important;
       }
 
       body {
-        background: #fff;
+        background: #ffffff;
       }
 
       .section {
         box-shadow: none;
+        border-radius: 0;
+        border-top: none;
       }
     }
   </style>
@@ -168,7 +246,7 @@
 <body>
   <header>
     <h1>特教老師教學建議整理工具 (AI 版)</h1>
-    <p>輸入孩子能力現況，可手動新增建議，也可以用 AI 自動產生建議。</p>
+    <p>輸入孩子能力現況，可手動新增建議，也可以用 AI 自動產生 Monsters, Inc. 風格小卡建議。</p>
   </header>
 
   <main>
@@ -178,7 +256,7 @@
       <textarea id="abilityInput" placeholder="請輸入孩子的能力現況……"></textarea>
       <div style="margin-top: 10px;">
         <button id="aiButton">用 AI 產生建議</button>
-        <span id="aiStatus" style="font-size:12px;color:#666;margin-left:10px;"></span>
+        <span id="aiStatus" style="margin-left:10px;"></span>
       </div>
     </section>
 
@@ -188,7 +266,7 @@
       <div class="flex">
         <div class="flex-2">
           <label>建議內容：</label>
-          <textarea id="suggestionText"></textarea>
+          <textarea id="suggestionText" placeholder="輸入你想給家長或老師的建議……"></textarea>
         </div>
         <div class="flex-1">
           <label>建議對象：</label>
@@ -197,7 +275,7 @@
             <option value="teacher">普班老師</option>
           </select>
 
-          <label>面向：</label>
+          <label style="margin-top:8px;">面向：</label>
           <select id="suggestionDomain">
             <option value="gross">粗大動作</option>
             <option value="fine">精細動作</option>
@@ -207,7 +285,7 @@
             <option value="daily">生活自理</option>
           </select>
 
-          <button id="addSuggestionBtn" style="margin-top:10px;">加入建議</button>
+          <button id="addSuggestionBtn" style="margin-top:12px;">加入建議</button>
         </div>
       </div>
     </section>
@@ -217,7 +295,7 @@
       <h2>三、建議彙整（依對象與六大面向）</h2>
 
       <div class="toolbar">
-        <button id="printButton" class="print-button">列印本頁建議</button>
+        <button id="printButton">列印本頁建議</button>
       </div>
 
       <div class="columns">
