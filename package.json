@@ -1,14 +1,8 @@
 {
-  "name": "special-teacher-ai",
+  "name": "special-teacher-ai-railway",
   "version": "1.0.0",
-  "main": "server.mjs",
   "type": "module",
-  "scripts": {
-    "start": "node server.mjs"
-  },
   "dependencies": {
-    "dotenv": "^16.0.0",
-    "express": "^4.18.2",
-    "node-fetch": "^2.6.7"
+    "openai": "4.33.0"
   }
 }

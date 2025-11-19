@@ -1,4 +1,3 @@
-// api/generate.js
 import OpenAI from "openai";
 
 const client = new OpenAI({
@@ -17,14 +16,18 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "No inputText provided" });
     }
 
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(500).json({ error: "OPENAI_API_KEY is missing" });
+    }
+
     const systemPrompt = `
 你是一位專業的特教老師，負責根據「孩子能力現況」產生教學與教養建議。
-請依照下列固定 JSON 結構輸出，不要加任何多餘說明或文字：
+請依照下列固定 JSON 結構輸出，不要加任何多餘說明或文字，只能輸出 JSON：
 
 {
   "parent": {
-    "gross": ["建議1", "建議2"],
-    "fine": ["建議1"],
+    "gross": [],
+    "fine": [],
     "cognition": [],
     "language": [],
     "social": [],
@@ -40,33 +43,33 @@ export default async function handler(req, res) {
   }
 }
 
-說明：
-- parent = 給家長的建議
-- teacher = 給普班老師的建議
-- 六大面向 key 必須固定是：gross, fine, cognition, language, social, daily
-- 每個陣列裡放 0~5 則建議句子（視需要而定）
-- 嚴格輸出合法 JSON（不能有註解、不能有多餘文字、中英混合都可以，但格式一定要是 JSON）
-`;
+請務必輸出合法 JSON。
+    `;
 
     const completion = await client.chat.completions.create({
       model: "gpt-4o-mini",
-      temperature: 0.7,
+      temperature: 0.6,
       messages: [
         { role: "system", content: systemPrompt },
-        {
-          role: "user",
-          content: `孩子能力現況如下：\n${inputText}`,
-        },
-      ],
+        { role: "user", content: `孩子能力現況如下：\n${inputText}` }
+      ]
     });
 
-    const suggestion = completion.choices[0].message.content;
+    const suggestionText = completion.choices[0]?.message?.content?.trim();
 
-    // suggestion 應該是一個 JSON 字串
-    // 前端會做 JSON.parse(suggestion) 再交給 fillAI()
-    return res.status(200).json({ suggestion });
+    try {
+      JSON.parse(suggestionText);
+    } catch (e) {
+      return res.status(500).json({
+        error: "Model did not return valid JSON",
+        raw: suggestionText
+      });
+    }
+
+    return res.status(200).json({ suggestion: suggestionText });
+
   } catch (err) {
-    console.error("API error:", err);
+    console.error(err);
     return res.status(500).json({ error: "Server Error" });
   }
 }
