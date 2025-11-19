@@ -4,26 +4,24 @@
   <meta charset="UTF-8" />
   <title>特教老師教學建議整理工具 (AI 版)</title>
 
-  <!-- 手寫風格字體（Google Fonts） -->
+  <!-- 手寫風字體 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Handlee&family=Nanum+Pen+Script&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      /* BABYMONSTER 風格主題色 */
-      --bm-bg: #f3f3f3;           /* 淺灰背景 */
-      --bm-text: #111111;        /* 黑字 */
-      --bm-accent: #ff9ecb;      /* 粉紅點綴 */
-      --bm-accent-2: #b29cff;    /* 淡紫點綴 */
-      --bm-card: #ffffff;        /* 白色卡片 */
-      --bm-border: #e0e0e0;      /* 淺灰邊框 */
-      --bm-button-bg: #eeeeee;   /* 淺灰按鈕 */
-      --bm-button-hover: #e0e0e0;
-      --bm-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      --bg-gradient-start: #fbe7ff;
+      --bg-gradient-end:   #f6f0ff;
+      --card-bg:           #ffffffcc;
+      --header-grad-start: #ff9ad5;
+      --header-grad-end:   #c192ff;
+      --accent:            #f48acb;
+      --accent-dark:       #e06ab3;
+      --accent-soft:       #fbe2f4;
+      --text-main:         #2b1635;
+      --text-soft:         #6b5678;
+      --border-soft:       #ead9ff;
     }
 
     * {
@@ -31,107 +29,97 @@
     }
 
     body {
-      font-family: "Handlee", "Nanum Pen Script", system-ui, -apple-system,
-        BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Patrick Hand", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
       padding: 0;
-      background-color: var(--bm-bg);
-      color: var(--bm-text);
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-main);
     }
 
     header {
-      background: radial-gradient(circle at top left, var(--bm-accent), #000000);
+      background: linear-gradient(90deg, var(--header-grad-start), var(--header-grad-end));
       color: white;
-      padding: 18px 24px;
-      box-shadow: var(--bm-shadow);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      padding: 20px 24px 18px;
+      box-shadow: 0 4px 12px rgba(120, 60, 150, 0.25);
     }
+
     header h1 {
       margin: 0;
       font-size: 26px;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+      letter-spacing: 2px;
     }
+
     header p {
-      margin: 6px 0 0;
+      margin: 8px 0 0;
       font-size: 15px;
+      color: #ffeefc;
+    }
+
+    .header-tagline {
+      margin-top: 6px;
+      font-size: 13px;
       opacity: 0.9;
     }
 
     main {
-      padding: 20px 24px 32px;
+      padding: 18px 24px 32px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    .logo-tag {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      font-size: 12px;
-      background: rgba(0, 0, 0, 0.2);
-    }
-
     .section {
-      background: var(--bm-card);
-      border-radius: 12px;
-      padding: 16px 20px 20px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 18px 20px 20px;
       margin-bottom: 18px;
-      box-shadow: var(--bm-shadow);
-      border: 1px solid var(--bm-border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .section::before {
-      content: "";
-      position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, rgba(255, 158, 203, 0.35), transparent);
-      pointer-events: none;
+      box-shadow: 0 10px 24px rgba(132, 93, 178, 0.15);
+      border: 1px solid var(--border-soft);
+      backdrop-filter: blur(8px);
     }
 
     .section h2 {
       margin-top: 0;
       font-size: 20px;
-      padding-left: 10px;
-      border-left: 4px solid var(--bm-accent-2);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      color: var(--text-main);
     }
 
-    .section h2 span.tag {
-      font-size: 11px;
-      padding: 2px 8px;
+    .section h2::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 22px;
       border-radius: 999px;
-      border: 1px solid var(--bm-accent-2);
-      background: rgba(178, 156, 255, 0.1);
+      background: linear-gradient(180deg, var(--accent), var(--header-grad-end));
     }
 
     textarea {
       width: 100%;
-      min-height: 100px;
+      min-height: 110px;
       resize: vertical;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #cccccc;
-      font-size: 14px;
-      font-family: "Handlee", "Nanum Pen Script", system-ui, sans-serif;
-      background: #fafafa;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      font-size: 15px;
+      font-family: "Patrick Hand", system-ui, sans-serif;
+      background: #ffffffdd;
+      color: var(--text-main);
+      transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px #fdd7f3;
+      transform: translateY(-1px);
     }
 
     label {
       font-size: 14px;
-      display: inline-block;
-      margin-bottom: 4px;
+      color: var(--text-soft);
     }
 
     .flex {
@@ -139,44 +127,56 @@
       gap: 16px;
       flex-wrap: wrap;
     }
+
     .flex-2 {
       flex: 2 1 320px;
     }
+
     .flex-1 {
       flex: 1 1 260px;
     }
 
     select,
     button {
-      padding: 8px 12px;
+      padding: 8px 10px;
       border-radius: 999px;
-      border: 1px solid #cccccc;
+      border: 1px solid var(--border-soft);
       font-size: 14px;
-      background: var(--bm-button-bg);
-      color: var(--bm-text);
-      font-family: "Handlee", system-ui, sans-serif;
+      background: #ffffffdd;
+      font-family: "Patrick Hand", system-ui, sans-serif;
     }
 
     button {
-      border: 1px solid var(--bm-accent-2);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-      transition: all 0.18s ease;
+      background: var(--accent);
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding-inline: 16px;
+      box-shadow: 0 4px 10px rgba(216, 111, 178, 0.45);
+      transition: transform 0.08s ease, box-shadow 0.12s ease, background 0.12s ease;
     }
 
     button:hover {
-      background-color: var(--bm-button-hover);
+      background: var(--accent-dark);
       transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 6px 16px rgba(180, 79, 149, 0.55);
     }
 
-    #aiButton {
-      border-color: var(--bm-accent);
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 8px rgba(180, 79, 149, 0.4);
     }
 
-    #aiStatus {
-      font-size: 12px;
-      margin-left: 10px;
-      color: #555;
+    .secondary-btn {
+      background: var(--accent-soft);
+      color: var(--text-main);
+      box-shadow: none;
+      border: 1px solid var(--border-soft);
+    }
+
+    .secondary-btn:hover {
+      background: #f7d3ee;
+      box-shadow: 0 3px 8px rgba(180, 79, 149, 0.25);
     }
 
     .columns {
@@ -187,58 +187,31 @@
     }
 
     .role-column {
-      background: #fbfbff;
-      border-radius: 12px;
-      padding: 10px 12px 12px;
-      border: 1px solid var(--bm-border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .role-column::before {
-      content: "";
-      position: absolute;
-      bottom: -30px;
-      left: -30px;
-      width: 90px;
-      height: 90px;
-      background: radial-gradient(circle, rgba(178, 156, 255, 0.35), transparent);
-      pointer-events: none;
+      background: #fff9ff;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid var(--border-soft);
     }
 
     .role-column h3 {
       margin-top: 0;
       margin-bottom: 8px;
       font-size: 16px;
-      border-bottom: 1px dashed var(--bm-accent-2);
-      padding-bottom: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 4px;
-    }
-
-    .role-badge {
-      font-size: 10px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      letter-spacing: 1px;
+      color: var(--text-main);
     }
 
     .domain-block {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       padding: 8px;
-      border-radius: 8px;
+      border-radius: 10px;
       background: #ffffff;
-      border: 1px dashed #e3e3e3;
+      border: 1px dashed var(--border-soft);
     }
 
     .domain-block h4 {
       margin: 0 0 4px;
-      font-size: 13px;
-      color: #444;
+      font-size: 14px;
+      color: var(--text-soft);
     }
 
     .domain-block ul {
@@ -251,29 +224,33 @@
     .toolbar {
       display: flex;
       justify-content: flex-end;
-      margin-bottom: 8px;
       gap: 8px;
-      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .pill-note {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #ffffffaa;
+      border: 1px solid var(--border-soft);
+      color: var(--text-soft);
     }
 
     .print-button {
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid var(--bm-accent-2);
-      background-color: var(--bm-button-bg);
-      color: var(--bm-text);
+      border: 1px solid var(--border-soft);
+      background-color: var(--accent-soft);
+      color: var(--text-main);
       font-size: 13px;
       cursor: pointer;
+      box-shadow: none;
     }
 
     .print-button:hover {
-      background-color: var(--bm-button-hover);
-    }
-
-    .mini-note {
-      font-size: 11px;
-      color: #666;
-      margin-top: 4px;
+      background-color: #f3cee9;
+      box-shadow: 0 3px 8px rgba(180, 79, 149, 0.25);
     }
 
     @media print {
@@ -285,7 +262,7 @@
       }
 
       body {
-        background: #ffffff;
+        background: #fff;
       }
 
       .section {
@@ -297,29 +274,28 @@
 <body>
   <header>
     <h1>特教老師教學建議整理工具</h1>
-    <p>BABYMONSTER 風 ✦ AI 幫你快速整理教學／教養建議。</p>
-    <div class="logo-tag">K-POP ver. BABYMONSTER</div>
+    <p>輸入孩子能力現況，AI 幫你整理成家長與普班老師可用的建議。</p>
+    <div class="header-tagline">粉紫手寫風小幫手 · 讓教學建議看起來也很可愛 💜</div>
   </header>
 
   <main>
     <!-- 能力現況 + AI -->
     <section class="section">
-      <h2>一、孩子能力現況 <span class="tag">Step 1</span></h2>
-      <textarea id="abilityInput" placeholder="請用自己的話描述孩子目前的能力現況、行為表現、學習狀況⋯⋯"></textarea>
-      <div style="margin-top: 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-        <button id="aiButton">用 AI 產生建議 ✦</button>
-        <span id="aiStatus"></span>
+      <h2>一、孩子能力現況</h2>
+      <textarea id="abilityInput" placeholder="請輸入孩子的能力現況……"></textarea>
+      <div style="margin-top: 10px; display:flex; align-items:center; gap:10px;">
+        <button id="aiButton">用 AI 產生建議</button>
+        <span id="aiStatus" style="font-size:12px;color:#6b5678;"></span>
       </div>
-      <div class="mini-note">小提醒：內容越具體，AI 產出的建議越貼近實際情況。</div>
     </section>
 
     <!-- 手動新增 -->
     <section class="section">
-      <h2>二、輸入教學／教養建議（手動） <span class="tag">Step 2</span></h2>
+      <h2>二、輸入教學／教養建議（手動）</h2>
       <div class="flex">
         <div class="flex-2">
           <label>建議內容：</label>
-          <textarea id="suggestionText" placeholder="輸入你想補充或調整的建議內容⋯⋯"></textarea>
+          <textarea id="suggestionText" placeholder="請輸入你想加入的建議句子……"></textarea>
         </div>
         <div class="flex-1">
           <label>建議對象：</label>
@@ -328,7 +304,9 @@
             <option value="teacher">普班老師</option>
           </select>
 
-          <label style="margin-top:8px;">面向：</label>
+          <div style="height:8px;"></div>
+
+          <label>面向：</label>
           <select id="suggestionDomain">
             <option value="gross">粗大動作</option>
             <option value="fine">精細動作</option>
@@ -338,26 +316,25 @@
             <option value="daily">生活自理</option>
           </select>
 
-          <button id="addSuggestionBtn" style="margin-top:10px;">加入建議 ➕</button>
-          <div class="mini-note">可搭配 AI 產生的建議再做補充或微調。</div>
+          <div style="margin-top: 12px;">
+            <button id="addSuggestionBtn" class="secondary-btn">加入建議</button>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 彙整 -->
     <section class="section">
-      <h2>三、建議彙整（依對象與六大面向） <span class="tag">Step 3</span></h2>
+      <h2>三、建議彙整（依對象與六大面向）</h2>
 
       <div class="toolbar">
-        <button id="printButton" class="print-button">列印本頁建議 🖨️</button>
+        <span class="pill-note">可列印下來貼在個案資料或聯絡本中使用</span>
+        <button id="printButton" class="print-button">列印本頁建議</button>
       </div>
 
       <div class="columns">
         <div class="role-column">
-          <h3>
-            給家長的建議
-            <span class="role-badge">PARENT</span>
-          </h3>
+          <h3>給家長的建議</h3>
           <div class="domain-block"><h4>粗大動作</h4><ul id="parent-gross"></ul></div>
           <div class="domain-block"><h4>精細動作</h4><ul id="parent-fine"></ul></div>
           <div class="domain-block"><h4>認知</h4><ul id="parent-cognition"></ul></div>
@@ -367,10 +344,7 @@
         </div>
 
         <div class="role-column">
-          <h3>
-            給普班老師的建議
-            <span class="role-badge">TEACHER</span>
-          </h3>
+          <h3>給普班老師的建議</h3>
           <div class="domain-block"><h4>粗大動作</h4><ul id="teacher-gross"></ul></div>
           <div class="domain-block"><h4>精細動作</h4><ul id="teacher-fine"></ul></div>
           <div class="domain-block"><h4>認知</h4><ul id="teacher-cognition"></ul></div>
