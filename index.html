@@ -2,118 +2,137 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>BABYMONSTER 教學建議工具 ✨</title>
+  <title>BABYMONSTER 特教老師教學整理工具</title>
 
-  <!-- Handwriting Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+  <!-- Handwriting style font (K-pop / BABYMONSTER aesthetic) -->
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Nanum Pen Script', cursive;
+      font-family: 'Shadows Into Light', cursive, system-ui;
       margin: 0;
       padding: 0;
-      background-color: #f1f1f4; /* light gray */
+      background-color: #f0f0f0; /* light gray */
       color: #000; /* black text */
-      font-size: 26px; /* handwriting visual */
     }
 
+    /* Header with BABYMONSTER aesthetic: clean, bold, minimal */
     header {
-      background-color: #111; /* BABYMONSTER black */
-      color: #f7f5fa; 
+      background: linear-gradient(90deg, #f0f0f0, #d8d8d8, #f0f0f0);
+      color: #000;
       padding: 20px 24px;
+      border-bottom: 3px solid #000;
       text-align: center;
-      border-bottom: 4px solid #ff90d0; /* BABYMONSTER pink accent */
     }
 
     header h1 {
       margin: 0;
-      font-size: 42px;
-      letter-spacing: 3px;
+      font-size: 32px;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 16px;
+      opacity: 0.9;
+      margin-top: 8px;
+      letter-spacing: 1px;
     }
 
     main {
-      padding: 24px;
+      padding: 18px 24px 40px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .section {
-      background: #fff;
+      background: #ffffffcc;
       border-radius: 12px;
       padding: 20px 24px;
-      margin-bottom: 22px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-      border-left: 6px solid #ff90d0; /* BABYMONSTER pink */
+      margin-bottom: 24px;
+      border: 2px solid #000;
+      box-shadow: 4px 4px 0px #000;
     }
 
-    h2 {
+    .section h2 {
       margin-top: 0;
-      font-size: 36px;
+      font-size: 22px;
+      border-left: 5px solid #000;
+      padding-left: 10px;
     }
 
     textarea {
       width: 100%;
-      min-height: 130px;
+      min-height: 120px;
       resize: vertical;
-      padding: 12px;
+      padding: 10px;
       border-radius: 8px;
-      border: 2px solid #ccc;
-      font-size: 26px;
+      border: 2px solid #000;
+      background: #f7f7f7;
+      font-size: 16px;
       box-sizing: border-box;
-      background-color: #f7f7f7;
+      font-family: 'Shadows Into Light', cursive;
     }
 
     select,
     button {
-      padding: 10px 16px;
+      padding: 8px 14px;
       border-radius: 8px;
-      border: 2px solid #ccc;
-      font-size: 26px;
-      background: #e7e7e7; /* light gray button */
+      border: 2px solid #000;
+      font-size: 16px;
+      background: #e6e6e6; /* light gray buttons */
+      font-family: 'Shadows Into Light', cursive;
       cursor: pointer;
-      transition: 0.2s;
     }
 
     button:hover {
-      background-color: #ff90d0; 
-      color: white;
-      border-color: #ff90d0;
+      background: #d0d0d0;
     }
 
     .columns {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 12px;
     }
 
     .role-column {
       background: #fafafa;
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 16px;
-      border: 2px solid #ddd;
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0px #000;
     }
 
     .role-column h3 {
-      margin-top: 0;
-      font-size: 32px;
-      color: #111;
-      border-bottom: 2px solid #ff90d0;
-      display: inline-block;
-      padding-bottom: 4px;
+      margin: 0 0 10px 0;
+      font-size: 20px;
+      text-align: center;
+      border-bottom: 2px solid #000;
+      padding-bottom: 6px;
+    }
+
+    .domain-block {
+      margin-bottom: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #000;
     }
 
     .domain-block h4 {
-      margin: 0 0 6px;
-      font-size: 28px;
-      color: #444;
+      margin: 0 0 6px 0;
+      font-size: 16px;
     }
 
-    ul {
-      font-size: 26px;
-      margin-left: 14px;
+    .domain-block ul {
+      list-style: square;
+      padding-left: 20px;
+      margin: 4px 0 0;
+      font-size: 15px;
     }
 
-    /* PRINT BUTTON */
+    /* Toolbar for Print */
     .toolbar {
       display: flex;
       justify-content: flex-end;
@@ -121,18 +140,17 @@
     }
 
     .print-button {
-      background-color: #e7e7e7;
-      border: 2px solid #ccc;
-      font-size: 26px;
-      padding: 10px 18px;
+      padding: 8px 14px;
       border-radius: 8px;
+      border: 2px solid #000;
+      background-color: #e6e6e6;
+      font-family: 'Shadows Into Light', cursive;
+      font-size: 16px;
       cursor: pointer;
     }
 
     .print-button:hover {
-      background-color: #ff90d0;
-      color: #fff;
-      border-color: #ff90d0;
+      background: #d0d0d0;
     }
 
     @media print {
@@ -149,30 +167,28 @@
         box-shadow: none;
       }
     }
-
   </style>
 </head>
-<body>
 
+<body>
   <header>
-    <h1>💗 BABYMONSTER 教學建議工具 💗</h1>
+    <h1>BABYMONSTER 教學建議工具</h1>
+    <p>K-POP handwriting style · Light gray theme · AI 教學建議產生器</p>
   </header>
 
   <main>
-    <!-- Section 1 -->
+
     <section class="section">
-      <h2>一、孩子能力現況 ✍️</h2>
-      <textarea id="abilityInput" placeholder="請輸入孩子的能力現況……（BABYMONSTER style 💗）"></textarea>
-      <div style="margin-top: 10px;">
-        <button id="aiButton">🎤 BABYMONSTER AI 產生建議</button>
-        <span id="aiStatus" style="font-size:20px;color:#666;margin-left:10px;"></span>
+      <h2>一、孩子能力現況</h2>
+      <textarea id="abilityInput" placeholder="請輸入孩子能力現況……"></textarea>
+      <div style="margin-top: 12px;">
+        <button id="aiButton">用 AI 產生建議</button>
+        <span id="aiStatus" style="font-size:14px;margin-left:10px;"></span>
       </div>
     </section>
 
-    <!-- Section 2 -->
     <section class="section">
-      <h2>二、手動新增建議 🎶</h2>
-
+      <h2>二、輸入教學／教養建議（手動）</h2>
       <div class="flex">
         <div class="flex-2">
           <label>建議內容：</label>
@@ -180,7 +196,7 @@
         </div>
 
         <div class="flex-1">
-          <label>對象：</label>
+          <label>建議對象：</label>
           <select id="suggestionAudience">
             <option value="parent">家長</option>
             <option value="teacher">普班老師</option>
@@ -196,22 +212,21 @@
             <option value="daily">生活自理</option>
           </select>
 
-          <button id="addSuggestionBtn" style="margin-top:10px;">加入建議</button>
+          <button id="addSuggestionBtn" style="margin-top:12px;">加入建議</button>
         </div>
       </div>
     </section>
 
-    <!-- Section 3 -->
     <section class="section">
-      <h2>三、BABYMONSTER 建議彙整 🎧💗</h2>
+      <h2>三、建議彙整（依對象與六大面向）</h2>
 
       <div class="toolbar">
-        <button id="printButton" class="print-button">🖨 列印 BABYMONSTER 建議</button>
+        <button id="printButton" class="print-button">列印本頁建議</button>
       </div>
 
       <div class="columns">
         <div class="role-column">
-          <h3>給家長的建議 💕</h3>
+          <h3>給家長的建議</h3>
           <div class="domain-block"><h4>粗大動作</h4><ul id="parent-gross"></ul></div>
           <div class="domain-block"><h4>精細動作</h4><ul id="parent-fine"></ul></div>
           <div class="domain-block"><h4>認知</h4><ul id="parent-cognition"></ul></div>
@@ -221,7 +236,7 @@
         </div>
 
         <div class="role-column">
-          <h3>給普班老師的建議 🖤</h3>
+          <h3>給普班老師的建議</h3>
           <div class="domain-block"><h4>粗大動作</h4><ul id="teacher-gross"></ul></div>
           <div class="domain-block"><h4>精細動作</h4><ul id="teacher-fine"></ul></div>
           <div class="domain-block"><h4>認知</h4><ul id="teacher-cognition"></ul></div>
@@ -231,6 +246,7 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <script>
@@ -250,6 +266,7 @@
       suggestionText.value = "";
     };
 
+    // 清空欄位
     function clearAll() {
       const ids = [
         "parent-gross","parent-fine","parent-cognition","parent-language","parent-social","parent-daily",
@@ -258,9 +275,9 @@
       ids.forEach(id => document.getElementById(id).innerHTML = "");
     }
 
+    // 填入 AI 回覆
     function fillAI(data) {
       clearAll();
-
       Object.entries(data.parent).forEach(([key, arr]) => {
         const ul = document.getElementById(`parent-${key}`);
         arr.forEach(v => {
@@ -269,7 +286,6 @@
           ul.appendChild(li);
         });
       });
-
       Object.entries(data.teacher).forEach(([key, arr]) => {
         const ul = document.getElementById(`teacher-${key}`);
         arr.forEach(v => {
@@ -285,7 +301,7 @@
       const text = abilityInput.value.trim();
       if (!text) return alert("請先輸入能力現況！");
 
-      aiStatus.textContent = "🎤 BABYMONSTER 思考中……";
+      aiStatus.textContent = "AI 生成中……";
 
       try {
         const response = await fetch("/api/generate", {
@@ -297,21 +313,21 @@
         const data = await response.json();
 
         if (!response.ok || !data.suggestion) {
-          aiStatus.textContent = "⚠️ AI 產生失敗，請稍後再試。";
+          aiStatus.textContent = "AI 產生失敗，請稍後再試。";
           return;
         }
 
-        aiStatus.textContent = "💗 完成 ✓";
+        aiStatus.textContent = "完成 ✓";
 
         const parsed = JSON.parse(data.suggestion);
         fillAI(parsed);
 
       } catch (e) {
-        aiStatus.textContent = "⚠️ 錯誤，請稍後再試。";
+        aiStatus.textContent = "錯誤，請稍後再試。";
       }
     };
 
-    // 列印
+    // 列印按鈕
     document.getElementById("printButton").onclick = () => {
       window.print();
     };
