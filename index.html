@@ -125,6 +125,44 @@
       margin: 4px 0 0;
       font-size: 13px;
     }
+
+    /* 列印工具列 & 列印樣式 */
+    .toolbar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 8px;
+    }
+
+    .print-button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background-color: #4a90e2;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .print-button:hover {
+      background-color: #3a79c0;
+    }
+
+    @media print {
+      header,
+      #aiButton,
+      #addSuggestionBtn,
+      .toolbar {
+        display: none !important; /* 列印時隱藏這些 UI */
+      }
+
+      body {
+        background: #fff;
+      }
+
+      .section {
+        box-shadow: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -177,6 +215,10 @@
     <!-- 彙整 -->
     <section class="section">
       <h2>三、建議彙整（依對象與六大面向）</h2>
+
+      <div class="toolbar">
+        <button id="printButton" class="print-button">列印本頁建議</button>
+      </div>
 
       <div class="columns">
         <div class="role-column">
@@ -268,6 +310,7 @@
         const data = await response.json();
 
         if (!response.ok || !data.suggestion) {
+          console.error("API error:", data);
           aiStatus.textContent = "AI 產生失敗，請稍後再試。";
           return;
         }
@@ -281,6 +324,11 @@
         console.error(e);
         aiStatus.textContent = "錯誤，請稍後再試。";
       }
+    };
+
+    // 列印按鈕
+    document.getElementById("printButton").onclick = () => {
+      window.print();
     };
   </script>
 </body>
