@@ -264,18 +264,21 @@
       aiStatus.textContent = "AI 生成中……";
 
       try {
-        const response = await fetch("/chat", {
+        const response = await fetch("/api/generate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text })
+          body: JSON.stringify({ inputText: text })
         });
 
         const data = await response.json();
         aiStatus.textContent = "完成 ✓";
 
-        fillAI(JSON.parse(data.reply));
+        // 後端回傳 data.suggestion = 一個 JSON 字串
+        // 這裡把它 parse 成物件，再丟進 fillAI
+        fillAI(JSON.parse(data.suggestion));
       } catch (e) {
-        aiStatus.textContent = "錯誤，請稍後再試";
+        console.error(e);
+        aiStatus.textContent = "錯誤，請稍後再試。";
       }
     };
   </script>
